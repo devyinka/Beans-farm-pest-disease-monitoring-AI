@@ -1,0 +1,7 @@
+{
+  "name": "beans-ai-microservice",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "./venv/bin/uvicorn main:app --reload --port 8000"
+  }
+}
