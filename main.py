@@ -1,10 +1,37 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import Response
 from pydantic import BaseModel
 import pandas as pd
 import pickle
 
 # Initialize the API
 app = FastAPI(title="Beans Farm AI Microservice")
+
+
+@app.get("/")
+async def root():
+    return {
+        "service": "Beans Farm AI Microservice",
+        "endpoints": {
+            "predict": {"method": "POST", "path": "/predict"},
+            "docs": {"path": "/docs"},
+            "openapi": {"path": "/openapi.json"},
+        },
+    }
+
+
+@app.get("/predict")
+async def predict_usage():
+    return {
+        "detail": "Use POST /predict with a JSON body matching FarmPayload.",
+        "tip": "Open /docs to try the endpoint in the browser.",
+    }
+
+
+@app.get("/favicon.ico")
+async def favicon():
+    # Avoid 404 noise from browsers automatically requesting /favicon.ico
+    return Response(status_code=204)
 
 # Load the AI Brain when the server boots up
 print("Loading AI Model...")
