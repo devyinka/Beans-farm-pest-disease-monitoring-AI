@@ -13,17 +13,17 @@ async def root():
     return {
         "service": "Beans Farm AI Microservice",
         "endpoints": {
-            "predict": {"method": "POST", "path": "/predict"},
+            "predict": {"method": "POST", "path": "/Predict"},
             "docs": {"path": "/docs"},
             "openapi": {"path": "/openapi.json"},
         },
     }
 
 
-@app.get("/predict")
+@app.get("/Predict")
 async def predict_usage():
     return {
-        "detail": "Use POST /predict with a JSON body matching FarmPayload.",
+        "detail": "Use POST /Predict with a JSON body matching FarmPayload.",
         "tip": "Open /docs to try the endpoint in the browser.",
     }
 
@@ -59,7 +59,7 @@ class FarmPayload(BaseModel):
     Rainy_Days_Past_10_Days: int
     Total_Rain_Volume_mm_Past_10_Days: float
 
-@app.post("/predict")
+@app.post("/Predict")
 async def predict_threat(payload: FarmPayload):
     try:
         #conver the incoming JSON payload into a DataFrame with the same structure as the training data
